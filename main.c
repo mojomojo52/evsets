@@ -22,9 +22,9 @@ struct config configuration = {
 	.rounds = 10,
 	.cal_rounds = 1000000,
 	.stride = 4096,
-	.cache_size = 6 << 20,
-	.cache_way = 12,
-	.cache_slices = 4,
+	.cache_size = 12 << 20,
+	.cache_way = 16,
+	.cache_slices = 12,
 	.algorithm = ALGORITHM_GROUP,
 	.strategy = 2,
 	.offset = 0,
@@ -34,6 +34,7 @@ struct config configuration = {
 	.buffer_size = 3072,
 	.flags = FLAG_CALIBRATE,
 };
+
 
 void
 usage(char *name)
@@ -189,6 +190,8 @@ main(int argc, char **argv)
 				configuration.flags |= (option ^ KEY);
 		}
 	}
+
+	//printf("rounds: %d cal_rounds: %d stride: %d cache_size: %d cache_way: %d cache_slices: %d strategy:%d offsest: %d ")
 
 	if (init_evsets(&configuration)) {
 		printf("[-] Initializing evsets library failed.\n");
